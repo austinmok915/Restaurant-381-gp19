@@ -244,9 +244,10 @@ app.post('/score', (req,res) => {
 						console.log('Invalid! Exist user score');
 					}
 					else{
-						n = rest.name;
-						s = rest.grades.score;
-						db.collection('restaurants').update({n:req.session.restname},{s:req.body.score},(err,result) => { 
+						
+						
+						
+						db.collection('restaurants').update({_id:ObjectId(_id)},{"grades.score":req.body.score},(err,result) => { 
 							res.redirect('/login');					
 						});				
 
