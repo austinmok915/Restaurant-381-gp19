@@ -94,7 +94,7 @@ app.get('/list',(req, res) => {
 			const db = client.db(dbName);
 			const findRestaurant = (db, callback) => { 
 				let cursor2 = db.collection('restaurants').find()
-				cursor2.toarray((err,rn) =>{
+				cursor2.toArray((err,rn) =>{
 					res.writeHead(200, {"Content-Type": "text/html"});
 					res.write('<html><head><title>Restaurant</title></head>');
 					res.write('<li>${rn.name}</li>');
