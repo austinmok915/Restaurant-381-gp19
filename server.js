@@ -96,9 +96,9 @@ app.get('/list',(req, res) => {
 				let cursor2 = db.collection('restaurants').find()
 				cursor2.toArray((err,rn) =>{
 					res.writeHead(200, {"Content-Type": "text/html"});
-					res.write('<html><head><title>Restaurant</title></head>');
+					res.write(`<html><head><title>Restaurant</title></head>`);
 					for(var i=0; i<20; i++){
-						res.write('<li>${rn[i].name}</li>');
+						res.write(`<li>${rn[i].name}</li>`);
 					}
 					res.end('</body></html>');
 				});
