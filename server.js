@@ -97,12 +97,9 @@ app.get('/list',(req, res) => {
 				let y = 0
 				let namelist = {};
 				let cursor2 = db.collection('restaurants').find()
-				cursor2.forEach((rname) => { 
-					namelist[i] = rname;
-					i++;
-					y = i;  
-				});
-				res.status(200).render('restaurantList',{resname:namelist});
+				cursor2.forEach((resname) => { 
+					res.status(200).render('restaurantList',{rname:resname});
+				}
 				callback();
 			}
 			client.connect((err) => { 
