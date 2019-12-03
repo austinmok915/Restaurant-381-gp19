@@ -8,7 +8,10 @@ const session = require('cookie-session');
 const express = require('express');
 const bodyParser = require('body-parser');
 const app = express();
+const formidable = require('formidable');
+const qs = require ('querystring');
 var timestamp = null;
+const fs = require('fs');
 
 const SECRETKEY1 = 'I want to pass COMPS381F';
 const SECRETKEY2 = 'Keep this to yourself';
@@ -208,7 +211,7 @@ app.post('/create', function(req, res, next){
                                owner: req.session.username,
                     }; 
                     console.log(doc);
-                    db2.collection("restaurant").insertOne(doc, function(err, res) {
+                    db2.collection("restaurants").insertOne(doc, function(err, res) {
                         if (err) throw err;
                             console.log("Document inserted");      
                                 db.close();
