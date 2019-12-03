@@ -117,10 +117,6 @@ app.get('/list',(req, res) => {
 
 
 app.post('/list',(req, res) => {
-	res.writeHead(200, {'Content-Type': 'text/html'}); 
-	res.write('<html>')   
-	res.write('<br><a href="/">Register Success</a>')
-	res.end('</html>') 	
 });
 
 
