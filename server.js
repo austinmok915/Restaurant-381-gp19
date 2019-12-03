@@ -94,12 +94,12 @@ app.get('/list',(req, res) => {
 			const db = client.db(dbName);
 			const findRestaurant = (db, callback) => { 
 				let cursor2 = db.collection('restaurants').find()
-				for (rn of cursor2){
+				cursor2.toarray((err,rn) =>{
 					res.writeHead(200, {"Content-Type": "text/html"});
 					res.write('<html><head><title>Restaurant</title></head>');
 					res.write('<li>${rn.name}</li>');
 					res.end('</body></html>');
-				}
+				});
 				callback();
 			}
 			client.connect((err) => { 
