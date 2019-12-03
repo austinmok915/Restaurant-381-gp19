@@ -101,8 +101,8 @@ app.get('/list',(req, res) => {
 					for(var i=0; i<20; i++){
 						res.write(`<li>${rn[i].name}</li>`);
 					}
-					res.write('<br><a href="/create">Insert Restaurant</a>')
-					res.write('<br><a href="/logout">Logout</a>')
+					res.write('<br><a href="/create">Insert Restaurant</a>/br>')
+					res.write('<br><a href="/logout">Logout</a></br>')
 					res.end('</body></html>');
 				});
 				callback();
