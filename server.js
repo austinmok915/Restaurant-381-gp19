@@ -93,12 +93,8 @@ app.get('/list',(req, res) => {
 			console.log("Connected successfully to server");
 			const db = client.db(dbName);
 			const findRestaurant = (db, callback) => { 
-				let namelist = [];
 				let cursor2 = db.collection('restaurants').find()
-				cursor2.forEach((resname) => { 
-					namelist = JSON.stringify(resname);	
-				});
-				res.status(200).render('restaurantList',{rname:[namelist]});
+				res.status(200).render('restaurantList',{rname:JSON.stringify(cursor2)});
 				callback();
 			}
 			client.connect((err) => { 
