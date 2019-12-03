@@ -228,6 +228,10 @@ app.post('/create', function(req, res, next){
     });
 });
 
+app.get('/create', (req,res) => {
+	res.status(200).render('create');
+});
+
 app.post('/score', (req,res) => {
 	
 	const client = new MongoClient(mongoDBurl);
@@ -269,7 +273,9 @@ app.post('/score', (req,res) => {
 	);
 });
 
-
+app.get('/score', (req,res) => {
+	res.status(200).render('score');
+});
 
 
 
