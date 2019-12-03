@@ -100,7 +100,6 @@ app.get('/list',(req, res) => {
 					res.write('<li>${rn.name}</li>');
 					res.end('</body></html>');
 				});
-				res.status(200).render('restaurantList',{rname:req.session.username});
 				callback();
 			}
 			client.connect((err) => { 
