@@ -100,9 +100,10 @@ app.get('/list',(req, res) => {
 					res.write(`<H1>Hello, `+req.session.username+`</H1>`);
 					for(var i = 0; i < 5;i++){
 						res.write(`<li>${rn[i].name}</li>`);
+						console.log("3");
 					}
-					res.write('<a href="/create">Insert Restaurant</a>')
-					res.write('<a href="/logout">Logout</a>')
+					res.write('<a href="/create">Insert Restaurant</a>');
+					res.write('<a href="/logout">Logout</a>');
 					res.end('</body></html>');
 				});
 				callback();
