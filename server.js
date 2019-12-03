@@ -93,15 +93,13 @@ app.get('/list',(req, res) => {
 			console.log("Connected successfully to server");
 			const db = client.db(dbName);
 			const findRestaurant = (db, callback) => { 
-				let namelist = []
+				res.writeHead(200, {"Content-Type": "text/html"});
+				res.write('<html><head><title>Restaurant</title></head>');
 				let cursor2 = db.collection('restaurants').find()
 				cursor2.forEach((rn) => {
-					res.writeHead(200, {"Content-Type": "text/html"});
-					res.write('<html><head><title>Restaurant</title></head>');
-					res.write('<li>${rn.name}</li>');
-					res.end('</body></html>');
-					
+					res.write('<li>${rn.name}</li>');	
 				});
+				res.end('</body></html>');
 				res.status(200).render('restaurantList',{rname:req.session.username});
 				callback();
 			}
