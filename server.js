@@ -98,10 +98,8 @@ app.get('/list',(req, res) => {
 					res.writeHead(200, {"Content-Type": "text/html"});
 					res.write('<html><head><title>Restaurant</title></head>');
 					res.write(`<H1>Hello, `+req.session.username+`</H1>`);
-					for(var i = 0; i < 2;i++){
+					for(var i = 0; i < 3;i++){
 						res.write(`<li>${rn[i].name}</li>`);
-						res.write('<a href="/create">Insert Restaurant</a>');
-						res.write('<a href="/logout">Logout</a>');
 					}
 					res.write('<a href="/create">Insert Restaurant</a>');
 					res.write('<a href="/logout">Logout</a>');
