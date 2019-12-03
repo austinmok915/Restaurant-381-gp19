@@ -98,9 +98,9 @@ app.get('/list',(req, res) => {
 					res.writeHead(200, {"Content-Type": "text/html"});
 					res.write('<html><head><title>Restaurant</title></head>');
 					res.write(`<H1>Hello, `+req.session.username+`</H1>`);
-					for(var i=0; i<20; i++){
-						res.write(`<li>${rn[i].name}</li>`);
-					}
+			
+					res.write(`<li>${rn[i].name}</li>`);
+					
 					res.write('<br><a href="/create">Insert Restaurant</a>/br>')
 					res.write('<br><a href="/logout">Logout</a></br>')
 					res.end('</body></html>');
@@ -121,6 +121,7 @@ app.get('/list',(req, res) => {
 
 
 app.post('/list',(req, res) => {
+	req.session = req.session.username;
 });
 
 
