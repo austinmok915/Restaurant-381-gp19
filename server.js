@@ -95,7 +95,7 @@ app.get('/list',(req, res) => {
 				cursor2.forEach((rname) => { 
 					for(var i=0; i < 20; i++){
 						namelist[i] = rname.name;
-						res.status(200).render('restaurantList',{resname:rname.name});
+						res.status(200).render('restaurantList',{resname:namelist[i]});
 					}
 				});
 				callback();
