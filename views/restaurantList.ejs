@@ -1,7 +1,7 @@
 <html>
    <body>
-         <% for(var rname of resname) { %>
-            <H1><%= rname %></H1>
-         <% } %>
+         <% rname.ForEach(function(item) { %>
+            <H1><%= item.rname %></H1>
+         <% }); %>
    </body>
 </html>
