@@ -99,7 +99,7 @@ app.get('/list',(req, res) => {
 				let cursor2 = db.collection('restaurants').find()
 				cursor2.forEach((resname) => { 
 					res.status(200).render('restaurantList',{rname:resname});
-				}
+				});
 				callback();
 			}
 			client.connect((err) => { 
