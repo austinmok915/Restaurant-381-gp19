@@ -1,7 +1,9 @@
 <html>
    <body>
-         <% for(var i=0; i < 30; i++) { %>
-            <H1><%= resname[i] %></H1>
-         <% } %>
+
+         <% rname.ForEach(function(item) { %>
+            <H1><%= item.rname %></H1>
+         <% }); %>
+
    </body>
 </html>
