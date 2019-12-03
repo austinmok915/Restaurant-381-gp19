@@ -90,14 +90,16 @@ app.get('/list',(req, res) => {
 			console.log("Connected successfully to server");
 			const db = client.db(dbName);
 			const findRestaurant = (db, callback) => { 
-				let namelist = []
+				let i = 0
+				let y = 0
+				let namelist = [];
 				let cursor2 = db.collection('restaurants').find()
 				cursor2.forEach((rname) => { 
-					for(var i=0; i < 20; i++){
-						namelist[i] = rname.name;
-						res.status(200).render('restaurantList',{resname:namelist[i]});
-					}
+					namelist[i] = rname.name;
+					i++;
+					y = i;  
 				});
+				res.status(200).render('restaurantList',{resname:namelist});
 				callback();
 			}
 			client.connect((err) => { 
