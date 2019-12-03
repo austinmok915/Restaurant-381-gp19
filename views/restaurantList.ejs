@@ -1,6 +1,7 @@
 <html>
    <body>
-       <H1>Hello, <%= resname %></H1>
-
+         <% for(var rname of namelist) { %>
+            <H1><%= rname %></H1>
+         <% } %>
    </body>
 </html>
