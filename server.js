@@ -96,7 +96,8 @@ app.get('/list',(req, res) => {
 				let namelist = []
 				let cursor2 = db.collection('restaurants').find()
 				cursor2.forEach((rn) => {
-					console.log(JSON.stringify(rn));
+					namelist = JSON.stringify(rn);
+					console.log(namelist.name)
 				});
 				res.status(200).render('restaurantList',{rname:req.session.username});
 				callback();
