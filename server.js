@@ -227,7 +227,45 @@ app.post('/create', function(req, res, next){
     });
 });
 
+app.post('/score', (req,res) => {
+	
+	const client = new MongoClient(mongoDBurl);
+	client.connect(
+		(err) => {
+			assert.equal(null, err);
+			console.log("Connected successfully to server");
+			const db = client.db(dbName);
+			const score = (db, callback) => { 
+				let cursor = db.collection('restaurants').find({"name":req.session.restname});
+				cursor.forEach((rest) => { 
+					
+					if (rest.grades.user == req.session.username) {
+						res.status(200).render('Exist user score');
+						console.log('Invalid! Exist user score');
+					}
+					else{
+						n = rest.name;
+						s = rest.grades.score;
+						db.collection('restaurants').update({n:req.session.restname},{s:req.body.score},(err,result) => { 
+							res.redirect('/login');					
+						});				
 
+					}
+				}); 
+				callback(); 
+			}
+			client.connect((err) => { 
+				assert.equal(null,err); 
+				console.log("Connected successfully to server");
+				const db = client.db(dbName);
+				score(db,() => { 
+					client.close();
+				});
+			});
+
+		}
+	);
+});
 
 
 
