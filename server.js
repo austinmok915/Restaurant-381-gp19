@@ -64,7 +64,7 @@ app.post('/login', setCurrentTimestamp, (req, res) => {
 						req.session.authenticated = true;
 						req.session.username = account.name;
 						res.redirect('/list');
-						break;
+						
 					}
 					else{
 						res.status(200).render('fail');
