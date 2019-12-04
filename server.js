@@ -87,7 +87,38 @@ app.post('/login',  (req, res) => {
 	);
 });
 
-
+app.get('/list',(req, res) => {
+	if (req.session.username===null){
+		res.writeHead(200, {"Content-Type": "text/html"});
+		res.write('<html><body>');
+		res.write('<a href="/login">Please login</a>');
+		res.end('</body></html>');
+	}
+	const client = new MongoClient(mongoDBurl);
+	client.connect(
+		(err) => {
+			assert.equal(null, err);
+			console.log("Connected successfully to server");
+			const db = client.db(dbName);
+			const findRestaurant = (db, callback) => { 
+				let cursor2 = db.collection('restaurants').find()
+				cursor2.toArray((err,rn) =>{
+					res.status(200);
+					res.render("restaurantList", {c: rn,n:req.body.name});
+				});
+				callback();
+			}
+			client.connect((err) => { 
+				assert.equal(null,err); 
+				console.log("Connected successfully to server");
+				const db = client.db(dbName);
+				findRestaurant(db,() => { 
+					client.close();
+				});
+			});
+		}
+	);
+});
 
 app.post('/list',(req, res) => {
 	if (req.session.username===null){
