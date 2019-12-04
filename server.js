@@ -55,6 +55,9 @@ app.post('/login',  (req, res) => {
 			assert.equal(null, err);
 			console.log("Connected successfully to server");
 			const db = client.db(dbName);
+			req.session.authenticated = true;
+			req.session.username = req.bodt.name;
+			res.redirect('/list');
 			const findUser = (db, callback) => {
 				let cursor = db.collection('user').find();				
 				cursor.forEach((account) => { 
