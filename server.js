@@ -23,7 +23,7 @@ let sessionUser = null;
 app.use(session({
   	name: 'session',
 	keys: [SECRETKEY1,SECRETKEY2],
-	authenticated = false
+	authenticated : false
 }));
 
 app.use(bodyParser.json());
