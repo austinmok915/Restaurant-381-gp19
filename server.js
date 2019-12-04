@@ -89,7 +89,7 @@ app.post('/login',  (req, res) => {
 
 
 
-app.get('/list',(req, res) => {
+app.post('/list',(req, res) => {
 	if (req.session.username===null){
 		res.writeHead(200, {"Content-Type": "text/html"});
 		res.write('<html><body>');
