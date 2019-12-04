@@ -59,14 +59,12 @@ app.post('/login', setCurrentTimestamp, (req, res) => {
 			const db = client.db(dbName);
 			const findUser = (db, callback) => { 
 				a = {"name":req.body.name, "password":req.body.password};
-				let cursor = db.collection('user').find(a).count();
-				
-				
-				if (cursor>0) {
+				let cursor = db.collection('user').find().toArray();
+				if (cursor.length >0) {
 					req.session.authenticated = true;
 					req.session.username = account.name;
 					res.redirect('/list');
-				}else {res.redirect('/login');}
+				}
 				
 				callback(); 
 				
