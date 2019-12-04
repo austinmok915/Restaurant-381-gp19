@@ -68,9 +68,10 @@ app.post('/login', setCurrentTimestamp, (req, res) => {
 					console.log('Invalid!');
 				}
 				});
-				callback(); 
-				res.redirect('/list');
 				
+				res.redirect('/list');
+				callback(); 
+				console.log('!');
 				
 			}
 			client.connect((err) => { 
