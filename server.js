@@ -104,7 +104,7 @@ app.get('/list',(req, res) => {
 				let cursor2 = db.collection('restaurants').find()
 				cursor2.toArray((err,rn) =>{
 					res.status(200);
-					res.render("restaurantList", {c: rn,n:req.body.name});
+					res.render("restaurantList", {c: rn,n:req.session.username});
 				});
 				callback();
 			}
