@@ -61,7 +61,7 @@ app.post('/login', setCurrentTimestamp, (req, res) => {
 				let cursor = db.collection('user').find() ;
 				cursor.forEach((account) => { 
 					
-				if (account.name == req.body.name && account.password == req.body.password) { 
+				if (account.name === req.body.name && account.password === req.body.password) { 
 					req.session.authenticated = true;
 					req.session.username = req.body.name;	}
 				else{
