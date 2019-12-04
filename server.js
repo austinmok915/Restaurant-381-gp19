@@ -62,15 +62,16 @@ app.post('/login', setCurrentTimestamp, (req, res) => {
 				cursor.forEach((account) => { 
 					
 				if (account.name == req.body.name && account.password == req.body.password) {
-					return false	}
+					req.session.authenticated = true;
+					req.session.username = req.body.name;
+					res.redirect('/list');
+					return false;	}
 				else{
 					res.status(200).render('fail');
 					console.log('Invalid!');
 				}
 				});
-				req.session.authenticated = true;
-				req.session.username = req.body.name;
-				res.redirect('/list');
+				
 				callback(); 
 				
 			}
