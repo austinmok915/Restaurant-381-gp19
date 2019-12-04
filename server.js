@@ -234,7 +234,7 @@ app.post('/create', function(req, res, next){
                                owner: req.session.username,
                     }; 
                     console.log(doc);
-                    db2.collection("restaurant").insertOne(doc, function(err, res) {
+                    db2.collection("restaurants").insertOne(doc, function(err, res) {
                         if (err) throw err;
                             console.log("Document inserted");      
                                 db.close();
