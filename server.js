@@ -116,8 +116,7 @@ app.get('/list',(req, res) => {
 });
 
 app.post('/list',(req, res) => {
-	req.session.authenticated = true;
-	req.session.username = account.name;
+	
 	if (req.session.username===null){
 		res.writeHead(200, {"Content-Type": "text/html"});
 		res.write('<html><body>');
