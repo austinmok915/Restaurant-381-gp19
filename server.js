@@ -220,9 +220,9 @@ app.post('/create', function(req, res, next){
 						console.log("Connected successfully to server");
 						const db = client.db(dbName);
 						const create = (db, callback) => {
-
+								new_r={};
 								new_r['mimetype'] = mimetype;
-                    			new_r['image'] = new Buffer.from(data).toString('base64');
+								new_r['image'] = new Buffer.from(data).toString('base64');
 
                    				 var _coord = { latitude: fields.latitude , longitude: fields.longitude};
                    				 var doc = { restaurant_id: fields.r_id ,
