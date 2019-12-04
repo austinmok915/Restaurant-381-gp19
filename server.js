@@ -56,7 +56,7 @@ app.post('/login',  (req, res) => {
 			console.log("Connected successfully to server");
 			const db = client.db(dbName);
 			const findUser = (db, callback) => {
-				let cursor = db.collection('user').find().toArray();
+				let cursor = db.collection('user').find();
 				
 				console.log(JSON.stringify(cursor));
 				
