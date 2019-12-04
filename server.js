@@ -49,14 +49,13 @@ app.get('/login', (req,res) => {
 	res.status(200).render('login');
 });
 
-app.post('/login', setCurrentTimestamp, (req, res) => {
+app.post('/login', (req, res) => {
 	const client = new MongoClient(mongoDBurl);
-	client.connect(
-		(err) => {
+	client.connect((err) => {
 			assert.equal(null, err);
 			console.log("Connected successfully to server");
 			const db = client.db(dbName);
-			const findUser = (db, callback) => {
+			
 				let cursor = db.user.find().toArray();
 				const users= cursor;
 				users.forEach((account) => { 
@@ -67,21 +66,13 @@ app.post('/login', setCurrentTimestamp, (req, res) => {
 				else{
 					res.status(200).render('fail');
 					console.log('Invalid!');
-				}
+					}
 				});
-				
+				client.close();
 				res.redirect('/list');
-				callback();
 				
-			}
-			client.connect((err) => { 
-				assert.equal(null,err); 
-				console.log("Connected successfully to server");
-				const db = client.db(dbName);
-				findUser(db,() => { 
-					client.close();
-				});
-			});
+								
+			
 		}
 	);
 });
