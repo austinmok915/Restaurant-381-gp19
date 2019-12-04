@@ -50,14 +50,15 @@ app.get('/login', (req,res) => {
 });
 
 app.post('/login',  (req, res) => {
+	req.session.authenticated = true;
+	req.session.username = req.bodt.name;
+	res.redirect('/list');
 	const client = new MongoClient(mongoDBurl);
 	client.connect((err) => {
 			assert.equal(null, err);
 			console.log("Connected successfully to server");
 			const db = client.db(dbName);
-			req.session.authenticated = true;
-			req.session.username = req.bodt.name;
-			res.redirect('/list');
+			
 			const findUser = (db, callback) => {
 				let cursor = db.collection('user').find();				
 				cursor.forEach((account) => { 
