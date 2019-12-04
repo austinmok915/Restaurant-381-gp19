@@ -185,7 +185,7 @@ app.post('/create', function(req, res, next){
             }
            fs.readFile(files.filetoupload.path, (err,data) => {    
                     const client = new MongoClient(mongoDBurl);
-                    client.connect((err)=> {
+                    client.connect(url, function (err, db) {
                     const db2 = client.db(dbName);
                     let new_r = {};
 		    
