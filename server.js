@@ -184,7 +184,7 @@ app.post('/create', function(req, res, next){
            fs.readFile(files.filetoupload.path, (err,data) => {    
                     let MongoClient = new MongoClient(mongourl);
                     MongoClient.connect(url, function (err, db) {
-                    const db2 = db.db(dbname);
+                    const db2 = db.db(dbName);
                     
                     new_r['mimetype'] = mimetype;
                     new_r['image'] = new Buffer.from(data).toString('base64');
