@@ -226,7 +226,7 @@ app.post('/create', function(req, res, next){
 
                    				 var _coord = { latitude: fields.latitude , longitude: fields.longitude};
                    				 var doc = { restaurant_id: fields.r_id ,
-                                		name: fields.name , 
+                                		name: req.body.name , 
                               			 borough: fields.borough,
                                			cuisine: fields.cuisine,
                                			photo: new_r['image'],
