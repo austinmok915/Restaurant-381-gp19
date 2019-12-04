@@ -1,8 +1,9 @@
 <html>
    <body>
-
+   
       <table>
-      <tr><th>Name</th></tr>
+      <tr><th>Restaurant</th></tr>
+      <tr>Showing <%=c.length%> document(s)</tr>
       <% for (var i = 0; i < c.length; i++) { %>
         <tr>
           <td><%= c[i].name %></td>
