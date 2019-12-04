@@ -57,22 +57,22 @@ app.post('/login',  (req, res) => {
 			const db = client.db(dbName);
 			const findUser = (db, callback) => {
 				let cursor = db.collection('user').find().toArray();
-				const users= cursor;
-				console.log(cursor);
-				console.log(users);
-				users.forEach((account) => { 
+				
+				console.log(JSON.stringify(cursor));
+				
+				cursor.forEach((account) => { 
 					
 				if (account.name === req.body.name && account.password === req.body.password) { 
 					req.session.authenticated = true;
 					req.session.username = account.name;
-					res.redirect('/list');	}
+						}
 				else{
 					res.status(200).render('fail');
 					console.log('Invalid!');
 				}
 				});
 				
-				
+				res.redirect('/list');
 				callback();
 				
 			}
@@ -194,7 +194,7 @@ app.post('/create', function(req, res, next){
 
                     var _coord = { latitude: fields.latitude , longitude: fields.longitude};
                     var doc = { restaurant_id: fields.r_id ,
-                                name: fields.name , 
+                                name: req.body.name , 
                                borough: fields.borough,
                                cuisine: fields.cuisine,
                                photo: new_r['image'],
