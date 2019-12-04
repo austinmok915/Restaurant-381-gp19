@@ -22,7 +22,8 @@ let sessionUser = null;
 
 app.use(session({
   	name: 'session',
-	keys: [SECRETKEY1,SECRETKEY2]
+	keys: [SECRETKEY1,SECRETKEY2],
+	authenticated = false
 }));
 
 app.use(bodyParser.json());
@@ -59,7 +60,8 @@ app.post('/login', setCurrentTimestamp, (req, res) => {
 			const findUser = (db, callback) => { 
 				let cursor = db.collection('user').find({"name":req.body.name, "password":req.body.password});
 				s = cursor.toArray();
-				if (typeof image_array !== 'undefined' && s.length>0) {
+				
+				if (typeof s !== 'undefined' && s.length>0) {
 					req.session.authenticated = true;
 					req.session.username = account.name;
 					res.redirect('/list');
@@ -245,7 +247,7 @@ app.post('/score', (req,res) => {
 						
 						
 						db.collection('restaurants').update({_id:ObjectId(_id)},{"grades.score":req.body.score},(err,result) => { 
-							res.redirect('/login');					
+							res.redirect('/list');					
 						});				
 
 					}
