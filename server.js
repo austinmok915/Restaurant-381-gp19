@@ -217,10 +217,11 @@ app.post('/create', function(req, res, next){
         });
 
             res.writeHead(200, {'Content-Type': 'text/html'});
-            res.write('Create Restaurant was successful');
-            res.write('<form action="/list">');
-            res.write('<input type="submit" value="Go Back"/>');
-            res.write('</form>');
+	     res.write('<html><body>');
+            res.write('<a href="/list">Create Restaurant was successful</a>');
+            res.write('</body></html>');
+            
+            
             res.end();
 
     });
