@@ -212,7 +212,7 @@ app.post('/create', function(req, res, next){
                     db2.collection("restaurants").insertOne(doc, function(err, res) {
                         if (err) throw err;
                             console.log("Document inserted");      
-                                db.close();
+                                db2.close();
                              }); 
                                })
         });
