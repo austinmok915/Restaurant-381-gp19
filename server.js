@@ -69,7 +69,7 @@ app.post('/login', (req, res) => {
 					}
 				});
 				client.close();
-				res.redirect('/list');
+				res.status(200).render('/');
 				
 								
 			
