@@ -50,9 +50,7 @@ app.get('/login', (req,res) => {
 });
 
 app.post('/login',  (req, res) => {
-	req.session.authenticated = true;
-	req.session.username = req.bodt.name;
-	res.redirect('/list');
+	
 	const client = new MongoClient(mongoDBurl);
 	client.connect((err) => {
 			assert.equal(null, err);
