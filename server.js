@@ -213,7 +213,7 @@ app.post('/create', function(req, res, next){
                             console.log("Document inserted");      
                                 db2.close();
                              }); 
-                               })
+                               });
         });
 
             res.writeHead(200, {'Content-Type': 'text/html'});
