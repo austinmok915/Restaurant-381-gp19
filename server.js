@@ -56,10 +56,7 @@ app.post('/login',  (req, res) => {
 			console.log("Connected successfully to server");
 			const db = client.db(dbName);
 			const findUser = (db, callback) => {
-				let cursor = db.collection('user').find();
-				
-				console.log(JSON.stringify(cursor));
-				
+				let cursor = db.collection('user').find();				
 				cursor.forEach((account) => { 
 					
 				if (account.name === req.body.name && account.password === req.body.password) { 
