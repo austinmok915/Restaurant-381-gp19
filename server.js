@@ -122,7 +122,7 @@ app.get('/list',(req, res) => {
 });
 
 app.get('/logout', (req,res) => {
-	req.session = null;
+	req.session.authenticated : false;
 	res.redirect('/');
 });
 
