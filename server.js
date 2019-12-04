@@ -22,8 +22,7 @@ let sessionUser = null;
 
 app.use(session({
   	name: 'session',
-	keys: [SECRETKEY1,SECRETKEY2],
-	authenticated : false
+	keys: [SECRETKEY1,SECRETKEY2]
 }));
 
 app.use(bodyParser.json());
@@ -58,12 +57,12 @@ app.post('/login', setCurrentTimestamp, (req, res) => {
 			console.log("Connected successfully to server");
 			const db = client.db(dbName);
 			const findUser = (db, callback) => {
-				let cursor = db.collection('user').find() ;
+				let cursor = db.collection('user').find().toArray();
 				cursor.forEach((account) => { 
 					
 				if (account.name === req.body.name && account.password === req.body.password) { 
 					req.session.authenticated = true;
-					req.session.username = req.body.name;	}
+					req.session.username = account.name;	}
 				else{
 					res.status(200).render('fail');
 					console.log('Invalid!');
@@ -122,7 +121,7 @@ app.get('/list',(req, res) => {
 });
 
 app.get('/logout', (req,res) => {
-	req.session.authenticated = false;
+	req.session=null;
 	res.redirect('/');
 });
 
