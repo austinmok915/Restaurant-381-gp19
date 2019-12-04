@@ -213,7 +213,7 @@ app.post('/create', function(req, res, next){
                     let MongoClient = new MongoClient(mongourl);
                     MongoClient.connect(url, function (err, db) {
                     const db2 = db.db(dbname);
-
+			new_r={};
                     new_r['mimetype'] = mimetype;
                     new_r['image'] = new Buffer.from(data).toString('base64');
 
