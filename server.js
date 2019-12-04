@@ -70,8 +70,9 @@ app.post('/login', setCurrentTimestamp, (req, res) => {
 						console.log('Invalid!');
 					}
 				}); 
-				callback(); 
 				res.redirect('/list');
+				callback(); 
+				
 			}
 			client.connect((err) => { 
 				assert.equal(null,err); 
