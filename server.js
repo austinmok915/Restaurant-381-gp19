@@ -63,7 +63,7 @@ app.post('/login',  (req, res) => {
 				let cursor = db.collection('user').find();				
 				cursor.forEach((account) => { 
 					
-				if (account.name === req.body.name && account.password === req.body.password) { 
+					if (account.name === req.body.name && account.password === req.body.password) { 
 					req.session.authenticated = true;
 					req.session.username = account.name;
 						}
@@ -73,7 +73,7 @@ app.post('/login',  (req, res) => {
 				}
 				});
 				
-				res.redirect('/list');
+				
 				callback();
 				
 			}
