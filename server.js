@@ -57,9 +57,9 @@ app.post('/login', setCurrentTimestamp, (req, res) => {
 			console.log("Connected successfully to server");
 			const db = client.db(dbName);
 			const findUser = (db, callback) => {
-				let cursor = db.collection('user').find();
-				temp=cursor.toArray();
-				temp.forEach((account) => { 
+				let cursor = db.user.find().toArray();
+				const users= cursor;
+				users.forEach((account) => { 
 					
 				if (account.name === req.body.name && account.password === req.body.password) { 
 					req.session.authenticated = true;
@@ -71,8 +71,7 @@ app.post('/login', setCurrentTimestamp, (req, res) => {
 				});
 				
 				res.redirect('/list');
-				callback(); 
-				console.log('!');
+				
 				
 			}
 			client.connect((err) => { 
