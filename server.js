@@ -183,17 +183,16 @@ app.post('/create', function(req, res, next){
                 mimetype = files.filetoupload.type;
             }
            fs.readFile(files.filetoupload.path, (err,data) => {    
-                    const client = new MongoClient(mongoDBurl);
-                    client.connect((err)=> {
-                    const db2 = client.db(dbName);
+                    let MongoClient = new MongoClient(mongoDBurl);
+                    MongoClient.connect(url, function (err, db) {
+                    const db2 = db.db(dbname);
                     let new_r = {};
-		    
                     new_r['mimetype'] = mimetype;
                     new_r['image'] = new Buffer.from(data).toString('base64');
 
                     var _coord = { latitude: fields.latitude , longitude: fields.longitude};
                     var doc = { restaurant_id: fields.r_id ,
-                                name: req.body.name , 
+                                name: fields.name , 
                                borough: fields.borough,
                                cuisine: fields.cuisine,
                                photo: new_r['image'],
@@ -211,7 +210,7 @@ app.post('/create', function(req, res, next){
                     db2.collection("restaurants").insertOne(doc, function(err, res) {
                         if (err) throw err;
                             console.log("Document inserted");      
-                                db2.close();
+                                db.close();
                              }); 
                                });
         });
