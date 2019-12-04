@@ -1,7 +1,7 @@
 {
-	"name": "s1211533s381project",
+	"name": "restaurant-s381-gp19",
 	"description": "COMPS381F Project Assignment - Source Code",
-	"author": "Fung Hiu Nam <g1211533@study.ouhk.edu.hk>",
+	"author": "restaurant-s381-gp19",
 	"version": "0.0.1",
 	"dependencies": {
 		"cookie-session": "latest",
