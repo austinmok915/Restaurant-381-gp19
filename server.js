@@ -140,7 +140,7 @@ app.post('/register', (req,res) => {
 					obj['name']=req.body.name;
 					obj['password']=req.body.password;
 					db.collection('user').insertOne(obj,(err,result) => { 
-						res.redirect('/login');					
+							res.status(200).render('register_success');				
 					});
 					}else {
 						res.status(200).render('fail reg');
