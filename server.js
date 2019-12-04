@@ -213,37 +213,51 @@ app.post('/create', function(req, res, next){
             if (files.filetoupload.type) {
                 mimetype = files.filetoupload.type;
             }
-           fs.readFile(files.filetoupload.path, (err,data) => {    
-                    let MongoClient = new MongoClient(mongoDBurl);
-                    MongoClient.connect(url, function (err, db) {
-                    const db2 = db.db(dbname);
-                    let new_r = {};
-                    new_r['mimetype'] = mimetype;
-                    new_r['image'] = new Buffer.from(data).toString('base64');
+          fs.readFile(files.filetoupload.path, (err,data) => {    
+                    let client = new MongoClient(mongoDBurl);
+					client.connect((err) => {
+						assert.equal(null, err);
+						console.log("Connected successfully to server");
+						const db = client.db(dbName);
+						const create = (db, callback) => {
 
-                    var _coord = { latitude: fields.latitude , longitude: fields.longitude};
-                    var doc = { restaurant_id: fields.r_id ,
-                                name: fields.name , 
-                               borough: fields.borough,
-                               cuisine: fields.cuisine,
-                               photo: new_r['image'],
-                               mimetype: new_r['mimetype'],
-                               address: { street: fields.street,
+								new_r['mimetype'] = mimetype;
+                    			new_r['image'] = new Buffer.from(data).toString('base64');
+
+                   				 var _coord = { latitude: fields.latitude , longitude: fields.longitude};
+                   				 var doc = { restaurant_id: fields.r_id ,
+                                		name: fields.name , 
+                              			 borough: fields.borough,
+                               			cuisine: fields.cuisine,
+                               			photo: new_r['image'],
+                             		 	 mimetype: new_r['mimetype'],
+                              			 address: { 
+								   street: fields.street,
                                    building: fields.building,
                                    zipcode: fields.zipcode,
-                                   street: fields.street,
                                    coord: _coord,
                                },
                                grades: { user: req.body.user, score: req.body.score },
                                owner: req.session.username,
                     }; 
-                    console.log(doc);
-                    db2.collection("restaurants").insertOne(doc, function(err, res) {
-                        if (err) throw err;
-                            console.log("Document inserted");      
-                                db.close();
-                             }); 
-                               });
+								db.collection('restaurants').insertOne(doc,(err,result) => { 
+									res.redirect('/list');					
+								});
+								
+			
+							callback(); 
+						}
+						client.connect((err) => { 
+							assert.equal(null,err); 
+							console.log("Connected successfully to server");
+							const db = client.db(dbName);
+							create(db,() => { 
+								client.close();
+							});
+						});
+			
+					});                   
+                    
         });
 
             res.writeHead(200, {'Content-Type': 'text/html'});
