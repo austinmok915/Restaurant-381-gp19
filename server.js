@@ -210,8 +210,8 @@ app.post('/create', function(req, res, next){
                 mimetype = files.filetoupload.type;
             }
            fs.readFile(files.filetoupload.path, (err,data) => {    
-                    let MongoClient = new MongoClient(mongoDBurl);
-                    MongoClient.connect(url, function (err, db) {
+                    const client = new MongoClient(mongoDBurl);
+                    client.connect(url, function (err, db) {
                     const db2 = db.db(dbName);
 			new_r={};
                     new_r['mimetype'] = mimetype;
