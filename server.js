@@ -96,10 +96,10 @@ app.get('/list',(req, res) => {
 			console.log("Connected successfully to server");
 			const db = client.db(dbName);
 			const findRestaurant = (db, callback) => { 
-				let cursor2 = db.collection('restaurants').find()
+				let cursor2 = db.collection('restaurants').find();
 				cursor2.toArray((err,rn) =>{
 					res.status(200);
-					res.render("restaurantList", {c: rn,n:req.session.username});
+					res.render("restaurantList", {c: rn});
 				});
 				callback();
 			}
@@ -196,12 +196,12 @@ app.get('/register', (req,res) => {
 });
 
 
-//photo
+
 app.post('/create', function(req, res, next){
     const form = new formidable.IncomingForm();
     form.parse(req, (err, fields, files) => {
         console.log('2');
-        // console.log(JSON.stringify(files));
+        
             const filename = files.filetoupload.path;
 
             let mimetype = "images/jpeg";
