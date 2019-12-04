@@ -62,6 +62,7 @@ app.post('/login', setCurrentTimestamp, (req, res) => {
 				obj['name']=req.body.name;
 				obj['password']=req.body.password;
 				let cursor = db.collection('user').find(obj).toArray();
+				console.log(cursor);
 				if (cursor.length >0) {
 					req.session.authenticated = true;
 					req.session.username = account.name;
