@@ -71,7 +71,7 @@ app.post('/login', setCurrentTimestamp, (req, res) => {
 				});
 				
 				res.redirect('/list');
-				
+				callback();
 				
 			}
 			client.connect((err) => { 
