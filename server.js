@@ -64,14 +64,15 @@ app.post('/login',  (req, res) => {
 					
 				if (account.name === req.body.name && account.password === req.body.password) { 
 					req.session.authenticated = true;
-					req.session.username = account.name;	}
+					req.session.username = account.name;
+					res.redirect('/list');	}
 				else{
 					res.status(200).render('fail');
 					console.log('Invalid!');
 				}
 				});
 				
-				res.redirect('/list');
+				
 				callback();
 				
 			}
