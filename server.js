@@ -58,17 +58,20 @@ app.post('/login', setCurrentTimestamp, (req, res) => {
 			console.log("Connected successfully to server");
 			const db = client.db(dbName);
 			const findUser = (db, callback) => { 
-				obj={};
-				obj['name']=req.body.name;
-				obj['password']=req.body.password;
-				let cursor = db.collection('user').find(obj).toArray();
-				console.log(cursor);
-				if (cursor.length >0) {
-					req.session.authenticated = true;
-					req.session.username = account.name;
-					res.redirect('/list');
+				cursor.every((account) => { 
+					
+				if (account.name == req.body.name && account.password == req.body.password) {
+					
+					return false
 				}
-				
+				else{
+					res.status(200).render('fail');
+					console.log('Invalid!');
+				}
+				});
+				req.session.authenticated = true;
+				req.session.username = req.body.name;
+				res.redirect('/list');
 				callback(); 
 				
 			}
