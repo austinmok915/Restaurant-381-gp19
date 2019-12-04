@@ -58,8 +58,10 @@ app.post('/login', setCurrentTimestamp, (req, res) => {
 			console.log("Connected successfully to server");
 			const db = client.db(dbName);
 			const findUser = (db, callback) => { 
-				a = {"name":req.body.name, "password":req.body.password};
-				let cursor = db.collection('user').find(a).toArray();
+				obj={};
+				obj['name']=req.body.name;
+				obj['password']=req.body.password;
+				let cursor = db.collection('user').find(obj).toArray();
 				if (cursor.length >0) {
 					req.session.authenticated = true;
 					req.session.username = account.name;
