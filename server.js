@@ -203,9 +203,9 @@ app.post('/create', function(req, res, next){
         console.log('2');
         // console.log(JSON.stringify(files));
             const filename = files.filetoupload.path;
-           
+
             let mimetype = "images/jpeg";
-           
+
             if (files.filetoupload.type) {
                 mimetype = files.filetoupload.type;
             }
@@ -213,7 +213,7 @@ app.post('/create', function(req, res, next){
                     let MongoClient = new MongoClient(mongourl);
                     MongoClient.connect(url, function (err, db) {
                     const db2 = db.db(dbname);
-                    
+
                     new_r['mimetype'] = mimetype;
                     new_r['image'] = new Buffer.from(data).toString('base64');
 
@@ -234,7 +234,7 @@ app.post('/create', function(req, res, next){
                                owner: req.session.username,
                     }; 
                     console.log(doc);
-                    db2.collection("restaurants").insertOne(doc, function(err, res) {
+                    db2.collection("restaurant").insertOne(doc, function(err, res) {
                         if (err) throw err;
                             console.log("Document inserted");      
                                 db.close();
