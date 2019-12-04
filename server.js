@@ -105,15 +105,8 @@ app.get('/list',(req, res) => {
 			const findRestaurant = (db, callback) => { 
 				let cursor2 = db.collection('restaurants').find()
 				cursor2.toArray((err,rn) =>{
-					res.writeHead(200, {"Content-Type": "text/html"});
-					res.write('<html><head><title>Restaurant</title></head>');
-					res.write(`<H1>Hello, `+req.session.username+`</H1>`);
-					for(var i = 0; i < 3;i++){
-						res.write(`<li>${rn[i].name}</li>`);
-					}
-					res.write('<br><a href="/create">Insert Restaurant</a></br>');
-					res.write('<br><a href="/logout">Logout</a></br>');
-					res.end('</body></html>');
+					res.status(200);
+					res.render("restaurantList", {c: rn});
 				});
 				callback();
 			}
