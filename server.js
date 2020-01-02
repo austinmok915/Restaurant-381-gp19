@@ -64,6 +64,7 @@ app.post('/login',  (req, res) => {
 					if (account.name === req.body.name && account.password === req.body.password) { 
 					req.session.authenticated = true;
 					req.session.username = account.name;
+						console.log(req.body.name);
 						}
 				else{
 					res.status(200).render('fail');
